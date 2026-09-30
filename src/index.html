@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Club & Travel Buddy Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 30px auto; padding: 20px; background: #fdfdfd; color: #333; line-height: 1.5; }
+        h1, h2 { color: #222; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+        .section { background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 30px; }
+        form, .action-box { background: #f9f9f9; padding: 15px; border: 1px solid #e1e1e1; border-radius: 4px; margin-top: 15px; }
+        label { display: block; margin-top: 8px; font-weight: bold; font-size: 13px; }
+        input { width: 100%; padding: 6px; margin-top: 4px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box; }
+        button { margin-top: 12px; background-color: #333; color: white; padding: 8px 14px; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background-color: #555; }
+        .links { margin-top: 10px; font-size: 14px; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        hr { margin: 40px 0; border: 0; border-top: 2px solid #ccc; }
+    </style>
+</head>
+<body>
+
+    <!-- ================= CAMPUS CLUB SECTION ================= -->
+    <div class="section">
+        <h1>Campus Club Member Management</h1>
+        
+        <!-- Task 1-4: Add Member Form -->
+        <form action="/members" method="POST">
+            <h3>Add New Member</h3>
+            <label>Member ID:</label><input type="text" name="memberId" required>
+            <label>Name:</label><input type="text" name="name" required>
+            <label>Club Name:</label><input type="text" name="clubName" required>
+            <label>Year:</label><input type="number" name="year" required>
+            <label>Role:</label><input type="text" name="role" required>
+            <label>Points:</label><input type="number" name="points" required>
+            <label>Interests:</label><input type="text" name="interests">
+            <label>Status:</label><input type="text" name="status">
+            <button type="submit">Add Member</button>
+        </form>
+        <div class="links"><a href="/members">View All Members (Sorted by Points Descending)</a></div>
+
+        <!-- Task 5: Display members by club & min points -->
+        <div class="action-box">
+            <h3>Filter Members by Club & Min Points (Task 5)</h3>
+            <form action="/members/filter-club" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Club Name:</label><input type="text" name="clubName" required>
+                <label>Minimum Points:</label><input type="number" name="minPoints" required>
+                <button type="submit">Filter Members</button>
+            </form>
+        </div>
+
+        <!-- Task 6 & 7: Search by Member ID -->
+        <div class="action-box">
+            <h3>Search Member by ID (Tasks 6 & 7)</h3>
+            <form action="/members/search" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Member ID:</label><input type="text" name="memberId" required>
+                <button type="submit">Search & View Specific Details</button>
+            </form>
+        </div>
+
+        <!-- Task 8: Update Role and Points -->
+        <div class="action-box">
+            <h3>Update Member Role & Points (Task 8)</h3>
+            <form action="/members/update" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Member ID:</label><input type="text" name="memberId" required>
+                <label>New Role:</label><input type="text" name="newRole" required>
+                <label>New Points:</label><input type="number" name="newPoints" required>
+                <button type="submit">Update Member</button>
+            </form>
+        </div>
+
+        <!-- Task 9: Increase points for club -->
+        <div class="action-box">
+            <h3>Increase Points for All Members in Club (Task 9)</h3>
+            <form action="/members/increase-points" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Club Name:</label><input type="text" name="clubName" required>
+                <label>Points to Add:</label><input type="number" name="addPoints" required>
+                <button type="submit">Increase Points</button>
+            </form>
+        </div>
+
+        <!-- Task 10: Range query -->
+        <div class="action-box">
+            <h3>Find Members by Points Range (Task 10)</h3>
+            <form action="/members/range" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Min Points:</label><input type="number" name="min" required>
+                <label>Max Points:</label><input type="number" name="max" required>
+                <button type="submit">Search Range</button>
+            </form>
+        </div>
+
+        <!-- Task 11: Delete member -->
+        <div class="action-box">
+            <h3>Delete Member by ID (Task 11)</h3>
+            <form action="/members/delete" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Member ID:</label><input type="text" name="memberId" required>
+                <button type="submit" style="background-color: #a94442;">Delete Member</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ================= TRAVEL BUDDY SECTION ================= -->
+    <div class="section">
+        <h1>Travel Buddy Finder</h1>
+
+        <!-- Task 1-4: Add Buddy Form -->
+        <form action="/buddies" method="POST">
+            <h3>Add New Travel Buddy</h3>
+            <label>Buddy ID:</label><input type="text" name="buddyId" required>
+            <label>Name:</label><input type="text" name="name" required>
+            <label>Destination:</label><input type="text" name="destination" required>
+            <label>Age:</label><input type="number" name="age" required>
+            <label>Budget:</label><input type="number" name="budget" required>
+            <label>Trip Duration (Days):</label><input type="number" name="tripDuration" required>
+            <label>Interests:</label><input type="text" name="interests">
+            <label>Status:</label><input type="text" name="status">
+            <button type="submit">Add Travel Buddy</button>
+        </form>
+        <div class="links"><a href="/buddies">View All Travel Buddies (Sorted by Budget Descending)</a>[cite: 1]</div>
+
+        <!-- Task 5: Display buddies by destination & min budget -->
+        <div class="action-box">
+            <h3>Filter Buddies by Destination & Min Budget (Task 5)</h3>
+            <form action="/buddies/filter-destination" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Destination:</label><input type="text" name="destination" required>
+                <label>Minimum Budget:</label><input type="number" name="minBudget" required>
+                <button type="submit">Filter Buddies</button>
+            </form>
+        </div>
+
+        <!-- Task 6 & 7: Search by Buddy ID -->
+        <div class="action-box">
+            <h3>Search Travel Buddy by ID (Tasks 6 & 7)</h3>
+            <form action="/buddies/search" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Buddy ID:</label><input type="text" name="buddyId" required>
+                <button type="submit">Search & View Specific Details</button>
+            </form>
+        </div>
+
+        <!-- Task 8: Update Destination and Budget -->
+        <div class="action-box">
+            <h3>Update Buddy Destination & Budget (Task 8)</h3>
+            <form action="/buddies/update" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Buddy ID:</label><input type="text" name="buddyId" required>
+                <label>New Destination:</label><input type="text" name="newDestination" required>
+                <label>New Budget:</label><input type="number" name="newBudget" required>
+                <button type="submit">Update Buddy</button>
+            </form>
+        </div>
+
+        <!-- Task 9: Increase budget for destination -->
+        <div class="action-box">
+            <h3>Increase Budget for All Travelers to Destination (Task 9)</h3>
+            <form action="/buddies/increase-budget" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Destination:</label><input type="text" name="destination" required>
+                <label>Amount to Add:</label><input type="number" name="addAmount" required>
+                <button type="submit">Increase Budget</button>
+            </form>
+        </div>
+
+        <!-- Task 10: Budget range query -->
+        <div class="action-box">
+            <h3>Find Buddies by Budget Range (Task 10)</h3>
+            <form action="/buddies/range" method="GET" style="background:none; border:none; padding:0; margin:0;">
+                <label>Min Budget:</label><input type="number" name="min" required>
+                <label>Max Budget:</label><input type="number" name="max" required>
+                <button type="submit">Search Range</button>
+            </form>
+        </div>
+
+        <!-- Task 11: Delete buddy -->
+        <div class="action-box">
+            <h3>Delete Travel Buddy by ID (Task 11)</h3>
+            <form action="/buddies/delete" method="POST" style="background:none; border:none; padding:0; margin:0;">
+                <label>Buddy ID:</label><input type="text" name="buddyId" required>
+                <button type="submit" style="background-color: #a94442;">Delete Buddy</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
